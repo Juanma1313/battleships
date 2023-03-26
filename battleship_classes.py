@@ -38,6 +38,14 @@ COLOR_MASK      = SHIP | WATER | NORMAL | EXPLODE | SUNK | MISS | SPLASH
 #COLOR_MASK      = 0x09F # 0b_0_1001_1111
 STATE_MASK      = NORMAL | EXPLODE | SUNK | MISS | SPLASH
 
+# *** Coordinate check constants
+RESULT_COLUMN_ERROR =-1
+RESULT_ROW_ERROR    =-2
+RESULT_MISS         = DEFAULT
+RESULT_HIT          = 1
+RESULT_SUNK         = 2
+RESULT_DUPLICATED   = 3
+RESULT_UNKNOWN      = 10
 
 
 # *** Ships classes
