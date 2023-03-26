@@ -131,13 +131,10 @@ class Ship():
         result = RESULT_MISS
         if self.position==HORIZONTAL:
             if (self.column <= coordinates[0] < self.column+self.size) and (self.row==coordinates[1]):
-                #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), Horizontal Hit detected")
                 result=RESULT_HIT
         else:
             if (self.row <= coordinates[1] < self.row+self.size) and (self.column==coordinates[0]):
-                #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), Vertical Hit detected")
                 result=RESULT_HIT
-        #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), ship={self.designation}, result={result}")
         return result
 
     def receive_shot(self, coordinates):
@@ -153,7 +150,6 @@ class Ship():
 
             self.units[unit]|=EXPLODE    # Sets the unit on fire
 
-            #if sum([(unit & EXPLODE)//EXPLODE for unit in self.units])==self.size:
             if self.hits>=self.size:
                 ## All units are exploded or sunk
                 self.sunk=True
@@ -231,7 +227,6 @@ class battle_zone():
         on columns and rows between Python arrays and the game screen'''
         # Loop throughout all the ships to represent them on the grid
         for ship in self.ships:
-            #print(f"Column={ship.column}, Row={ship.row}, Size={ship.size}, Units={ship.units}")
             for i in range(ship.size):
                 # Calculate the coordenates for each ship element
                 (column, row)  = (ship.column-1, ship.row+i-1) if ship.position==VERTICAL else (ship.column+i-1, ship.row-1)
@@ -293,10 +288,8 @@ class battle_zone():
         column=coordinates[0]
         row = coordinates[1]
         if not (1 <= column <= self.columns):
-            #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), Column error")
             result = RESULT_COLUMN_ERROR
         elif not (1 <= row <= self.rows):
-            #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), Row error")
             result = RESULT_ROW_ERROR
         elif len(self.ships)==0:  # There are no ships yet
             result = RESULT_MISS
@@ -304,19 +297,16 @@ class battle_zone():
             for ship in self.ships:
                 result= ship.check_coordinates(coordinates)
                 if result != RESULT_MISS:
-                    #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), Collition detected, Result={result}")
                     break
             else: # No ship found
                 ship=None
 
-        #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), Result={result}, Ship={ship}")
         return result, ship
 
     def validate_ship(self, ship):
         ''' tests that the ship coordinates and boundaries are correct and there is no collission
         with an existing ship
         '''
-        #print(f"{__class__.__name__}.validate_ship({ship}),  coordinates={ship.coordinates}, position={ship.position}")
         result=RESULT_UNKNOWN
         for i in range(ship.size):
             if ship.position == VERTICAL:
@@ -324,7 +314,6 @@ class battle_zone():
             else:
                 result, other_ship=self.check_coordinates([ship.column+i, ship.row])
             if result!=RESULT_MISS:
-                #print(f"{__class__.__name__}.validate_chip({ship}), Collition detected at element[{i}], Result={result}, ship={other_ship}")
                 break
         return result
 
@@ -333,7 +322,6 @@ class battle_zone():
         If provided, It verifyes coordinates and boundaries and check for collissions.
         if not provided, generates random position and coordenates
         '''
-        #print(f"{__class__.__name__}.new_ship({ship_class}),  coordinates={ship.coordinates}, position={ship.position}")
         if position == None:
             position=self.random_position
         if not coordinates: # if not provided define random coordinates for the ship
@@ -342,7 +330,6 @@ class battle_zone():
         result = self.validate_ship(ship)
         if result == RESULT_MISS:
             self.ships+=[ship]
-        #print(f"{__class__.__name__}.new_ship({ship_class}),  ship={ship}, coordinates={ship.coordinates}, position={ship.position}")
         return result
 
     def random_coordinates(self, size=None, position=None):
@@ -394,8 +381,6 @@ class battle_zone():
                     explosion=SPLASH
 
                 self.received_shots.update({coordinates:[result,designation, explosion]})
-
-        #print(f"{__class__.__name__}.receive_shot({coordinates}),  ship={designation}, result={result}")
         return result, designation
 
     def fire_shot(self, coordinates, battle_zone ):
@@ -422,6 +407,4 @@ class battle_zone():
                     # There is a miss, prepare splash
                     explosion=SPLASH
                 self.fired_shots.update({coordinates:[result, designation, explosion]})
-        #print(f"{__class__.__name__}.fire_shot({coordinates}),  ship={designation}, result={result}")
         return result, designation
-
