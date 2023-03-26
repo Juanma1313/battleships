@@ -24,6 +24,22 @@ def display_battle_zone(battle_zone):
     #display_grids(battle_zone)
 
 
+def translate_coordinates(location):
+    ''' Translate the player coordinate string str_row_letter+str_column_number
+    to internal representation tuple (int_column, int_row).
+    '''
+    row=-1  # Set coordinates to error
+    col=-1
+    if not (ord('A')  <= ord(location[0]) <= ord('J')):   # Bad row
+        print(f"Sorry, the coordinates {location} are invalid, valid rows are from A to J")
+    elif not location[1:].isnumeric():    # bad column
+        print(f"Sorry, the coordinates {location} are invalid, valid columns are from 1 to 10")
+    else:
+        row =  ord(location[0]) - ord('@')
+        col =  int(location[1:])
+    return (col, row)
+
+
 def battleships_game(columns=10,rows=10, name="Player"):
     ''' Main Battleship game function.
     It prepares the player and the computer boards and alternatively
