@@ -11,6 +11,9 @@ from time import sleep as delay     # delay in seconds to allow player to read s
 from battleships_colors import *    # import available color commands
 from battleships_classes import *    # import battleships classes
 
+# **** Define Players arsenal
+PLAYER_SHIPS = [Carrier, Battleship, Destroyer, Submarine, Patrol_Boat]
+COMPUTER_SHIPS = [Carrier, Battleship, Destroyer, Submarine, Patrol_Boat]
 
 def battleships_game(columns=10,rows=10, name="Player"):
     ''' Main Battleship game function.
