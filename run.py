@@ -15,6 +15,15 @@ from battleships_classes import *    # import battleships classes
 PLAYER_SHIPS = [Carrier, Battleship, Destroyer, Submarine, Patrol_Boat]
 COMPUTER_SHIPS = [Carrier, Battleship, Destroyer, Submarine, Patrol_Boat]
 
+def display_battle_zone(battle_zone):
+    '''Presents the full game screen to the console calling all the functions
+    that create each individual segment of the screen
+    '''
+    display_title(battle_zone)
+    display_status(battle_zone)
+    display_grids(battle_zone)
+
+
 def battleships_game(columns=10,rows=10, name="Player"):
     ''' Main Battleship game function.
     It prepares the player and the computer boards and alternatively
