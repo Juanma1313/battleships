@@ -12,7 +12,7 @@ It produces 2 report files. one for the player side and other for the Computer
 side, with the result of all the performed tests.
 '''
 import time
-from battleships import *
+from run.py import *
 
 class Tests:
     ''' Performs automated tests and stores and verifies results
