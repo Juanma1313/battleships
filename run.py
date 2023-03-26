@@ -68,6 +68,28 @@ def get_new_ship_location(ship_class):
 
     return coordinates, position
 
+def get_coordinates():
+    ''' Requests to the user the firing coordinates, validates the input and
+    returns one of the following options as tuple (column, row):
+        - A tuple with valid translated numeric coordinates
+        - The tuple (None, None) signaling a request for automation
+        - The tuple (-1, -1) signaling that there was an input error
+        '''
+    coordinates=(-1, -1)    # Set coordinates to error
+    print(f"Please type in the coordinates to fire")
+    print("(use Leters A-J for row, 1-10 for column ")
+    print("just press [RETURN] and an automatic random coordinates will be generated")
+    print(" Examples: 'A1' B8 , D10, H3, etc.: ",end='')
+    location =input().upper()
+    if not location:    # Empty string
+        coordinates=(None, None)    # Set coordinates to automatic
+    elif len(location)<2: # Invalid coordinates
+        print(f"Sorry, the coordinates {location} are invalid")
+    else:
+        coordinates=translate_coordinates(location)
+
+    return coordinates
+
 
 def battleships_game(columns=10,rows=10, name="Player"):
     ''' Main Battleship game function.
