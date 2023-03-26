@@ -39,6 +39,35 @@ def translate_coordinates(location):
         col =  int(location[1:])
     return (col, row)
 
+def get_new_ship_location(ship_class):
+    ''' Requests to the user the new ship location , validates the input and
+    returns one of the following options as tuple (coordinate, position)
+    where coordinates is a tuple in the format (int_column, int_raw)
+    and the position either HORIZONTAL or VERTICAL constants.
+        - A tuple with valid translated numeric coordinates and position
+        - The tuple ((None, None),BNone) signaling a request for automation
+        - The tuple ((-1, -1),-1) signaling that there was an input error
+        '''
+    coordinates=(-1, -1)    # Set coordinates to error
+    position=-1
+    print(f"Please type in the location and position of the new {ship_class.__name__}")
+    print("(use Leters A-J for row, 1-10 for column and V/H for vertial or Horizontal")
+    print("just press [RETURN] and an automatic random location will be generated")
+    print(" Examples: 'VA1' HB8 , VD10, HH3, etc.: ",end='')
+    location =input ().upper()
+    if not location:    # Empty string
+        coordinates=(None, None)    # Set coordinates to automatic
+        position=None               # Set position to automatic
+    elif len(location)<3: # Invalid location
+        print(f"Sorry, the location {location} is invalid")
+    elif location[0] not in ['V','H']: # Invalid Position
+        print(f"Sorry, the location {location} is invalid, valid possitions are only  V or H")
+    else:
+        position = HORIZONTAL if location[0]=='H' else VERTICAL
+        coordinates=translate_coordinates(location[1:])
+
+    return coordinates, position
+
 
 def battleships_game(columns=10,rows=10, name="Player"):
     ''' Main Battleship game function.
