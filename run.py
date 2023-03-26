@@ -15,13 +15,58 @@ from battleships_classes import *    # import battleships classes
 PLAYER_SHIPS = [Carrier, Battleship, Destroyer, Submarine, Patrol_Boat]
 COMPUTER_SHIPS = [Carrier, Battleship, Destroyer, Submarine, Patrol_Boat]
 
+def display_grids(battle_zone):
+    ''' Translates the internal representation in the battle_zone object to the
+    display representation and outputs the information to the console.
+    Once the information is presented, calls tu update explosions.
+    Note: Remember that grid is a python bidimentional array and starts
+        at grid[0][0]
+    '''
+    battle_zone.update_grids()   # Update the grid and radar with any new information
+    #print("\n".join([f"{', '.join([f'0x{y:03X}' for y in x])}" for x in battle_zone.grid]))
+
+    # Draws the Grid Header
+    grid=battle_zone.grid
+    radar=battle_zone.radar
+    grid_header_row =f"{C_GRID_HEADER_ROW }  " + "".join([f"{x:3}" for x in range(1,battle_zone.columns+1)])+" "+C_NORMAL
+    radar_header_row=f"{C_RADAR_HEADER_ROW}  " + "".join([f"{x:3}" for x in range(1,battle_zone.columns+1)])+" "+ C_NORMAL
+    print(grid_header_row+radar_header_row)
+    # Draws Grid elements
+    for row in range(battle_zone.rows):
+        grid_row =f"{C_GRID_HEADER_COL} {chr(65 + row) } " # initializes grid row
+        radar_row=f"{C_RADAR_HEADER_COL} {chr(65 + row)} "    # initializes radar row
+        for col in range(battle_zone.columns):
+            #Calculate grid column
+            element = grid[row][col]
+            try: # avoids the game to break if there is color or caracter set errors.
+                 #   (this is in case the set is loaded from a config file)
+                graph_element=Game_Colors[element & COLOR_MASK] + board_elements[element & ELEMENT_MASK ]
+                grid_row+= graph_element
+            except Exception  as e:
+                grid_row+= "???"
+                #print(f"display_battle_zone(): Error: {e}\n Pos({row}, {col})={hex(element)}, Game_Colors({hex(element & COLOR_MASK)}) , board_elements({hex(element & ELEMENT_MASK)})")
+            # calculate Radar column
+            element = radar[row][col]
+            try: # avoids the game to break if there is color or caracter set errors.
+                 #   (this is in case the set is loaded from a config file)
+                graph_element=Game_Colors[element & COLOR_MASK] + board_elements[element & ELEMENT_MASK ]
+                radar_row+= graph_element
+            except Exception  as e:
+                radar_row+= "???"
+                print(f"display_battle_zone(): Error: {e}\n Pos({row}, {col})={hex(element)}, Game_Colors({hex(element & COLOR_MASK)}) , board_elements({hex(element & ELEMENT_MASK)})")
+
+        print(grid_row + C_NORMAL + radar_row +C_NORMAL)   # OUTPUTS THE FULL ROW TO THE CONSOLE
+
+    battle_zone.update_explosions() # Update explosion for next display loop
+
+
 def display_battle_zone(battle_zone):
     '''Presents the full game screen to the console calling all the functions
     that create each individual segment of the screen
     '''
     display_title(battle_zone)
     #display_status(battle_zone)
-    #display_grids(battle_zone)
+    display_grids(battle_zone)
 
 
 def translate_coordinates(location):
