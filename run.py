@@ -7,6 +7,8 @@ Description:
 This file contains the main entry point for the Battleships game application.
 It holds also all the console-user interaction and the main game logic.
 '''
+from time import sleep as delay     # delay in seconds to allow player to read screens
+
 from battleships_colors import *    # import available color commands
 
 def get_grid_size(name, cols, rows):
