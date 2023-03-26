@@ -9,6 +9,42 @@ It holds also all the console-user interaction and the main game logic.
 '''
 from battleships_colors import *    # import available color commands
 
+def get_grid_size(name, cols, rows):
+    '''Requests the user the size of the board in columns and rows.
+    the format for the user is str_columns_number+'x'str_rows_number
+    returns a tuple in the form (int_columns, int_rows)
+    '''
+    while True:
+        display_title()
+        print(f"\n\n\nThe current battle_zone size is a grid of {cols}x{rows}.")
+        print(f"If you want to change this setting, type the new size like '11x11'".center(66))
+        print(f"o just press [Enter] to continue with the current size".center(66))
+        print(f"(sizes available are from 8x8 up to 12x10)".center(66))
+        print (" "*33, end='')
+        size =input()
+        if size:
+            player_name=None
+            try:
+                t_cols,t_rows=size.split("x")
+                if not (8 <= int(t_cols) <= 12):
+                    # value out of range
+                    print (f"\n Sorry, {t_cols} columns is not valid".center(66))
+                elif not (8 <= int(t_rows) <= 10):
+                    print (f"\n Sorry, {t_rows} rows is not valid".center(66))
+                else:
+                    cols=int(t_cols)
+                    rows=int(t_rows)
+                    break
+            except Exception as e:
+                print (f"\n Sorry, {size} is not valid".center(66))
+            delay(2)  # waits for 2 secconds so the user can read the message, and then continues
+            #input("Press [Enter] to try again".center(66))
+
+        else:
+            break
+
+    return cols,rows
+
 def get_player_name(name=None):
     player_name=None
     while not player_name:
