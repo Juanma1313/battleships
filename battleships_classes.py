@@ -50,6 +50,34 @@ Game_Colors={
     SHIP | EXPLODE  : C_SHIP_EXPLODE,
     SHIP | SUNK     : C_SHIP_SUNK}
 
+# *** Board elements ***
+CHARSET = 0 # Default character set
+if CHARSET == 0:
+   # define character set/colors when using a base console
+    board_elements={
+        WATER | NORMAL              : ' . ',
+        WATER | SPLASH              : ' * ',
+        WATER | MISS                : ' X ',
+        HORIZONTAL | SHIP | DECK    : '\u2588\u2588\u2588',
+        HORIZONTAL | SHIP | BOW     : ' \u25c4\u2588',
+        HORIZONTAL | SHIP | STERN   : '\u2588\u25ba ',
+        VERTICAL   | SHIP | DECK    : '  \u2588',
+        VERTICAL   | SHIP | BOW     : '  \u25b2',
+        VERTICAL   | SHIP | STERN   : '  \u25bc',
+        RADAR      | SHIP           : '\u2590\u2588\u258c'}
+else:
+   # define character set/colors when using an enhanced console
+    board_elements={
+        WATER | NORMAL              : ' · ',
+        WATER | SPLASH              : ' * ',
+        WATER | MISS                : ' X ',
+        HORIZONTAL | SHIP | DECK    : ESCSEQ+S_UNDERLINED+'m\u00af\u00af\u00af',
+        HORIZONTAL | SHIP | BOW     : '  <',
+        HORIZONTAL | SHIP | STERN   : ESCSEQ+S_UNDERLINED+'m\u00af\u00af'+ESCSEQ+S_UNDERLINED+'m]',
+        VERTICAL   | SHIP | DECK    : ' \u2502\u2502',
+        VERTICAL   | SHIP | BOW     : ' /\\',
+        VERTICAL   | SHIP | STERN   : ' \u2514\u2518',
+        RADAR      | SHIP           : '\u2590\u2588\u258c'}
 
 # *** Coordinate check constants
 RESULT_COLUMN_ERROR =-1
