@@ -168,6 +168,31 @@ def battleships_game(columns=10,rows=10, name="Player"):
 
     return winner
 
+def game_over_message(message):
+    ''' Presents the final screen to the console with the winner message
+    and waits for the player to press [Enter].
+    '''
+    row=10
+    screen_width=70
+    press_enter_msg="Press [Enter] to continue"
+    if len(message) < len(press_enter_msg):
+        message=message.center(len(press_enter_msg))
+
+    line1=("*"*(len(message)+6)+" ")
+    line2=("**" + " "*(len(message)+2) +"** ")
+    column=(screen_width-len(line1))//2
+    print(CURPOS.format(row,  column)+line1)
+    print(CURPOS.format(row+1,column)+line1)
+    print(CURPOS.format(row+2,column)+line2,)
+    print(CURPOS.format(row+3,column)+("** "+message+" ** "))
+    print(CURPOS.format(row+4,column)+line2)
+    print(CURPOS.format(row+5,column)+line2)
+    print(CURPOS.format(row+6,column)+"** "+"Press [Enter] to continue".center(len(message))+" ** ")
+    print(CURPOS.format(row+7,column)+line2)
+    print(CURPOS.format(row+8,  column)+line1)
+    print(CURPOS.format(row+9,column)+line1)
+    input()
+
 
 
 def get_grid_size(name, cols, rows):
