@@ -368,16 +368,12 @@ def display_title(battle_zone=None):
     print(C_TITLE+"".center(columns*2*3+6)+C_NORMAL)
     print(C_TITLE+"BATTLESHIPS".center(columns*2*3+6)+C_NORMAL)
 
-# GLOBAL VARIABLES
-#player_name=None
-
 def main(args):
     ''' Presents the main menu and directs the control to the
     selected option.
     '''
     columns=10
     rows=10
-
     player_name=get_player_name()
     while True:
         option=main_menu(player_name)
