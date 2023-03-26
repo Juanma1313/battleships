@@ -38,12 +38,9 @@ BC_PURPLE   ='45'
 BC_CYAN     ='46'
 BC_WHITE    ='47'
 
-#CLRSCR = ESCSEQ + "2J"      # Clear screen command
+#CLRSCR = ESCSEQ + "2J" # Clear screen command (does not always work)
 CLRSCR =  "\033c"       # Clear screen command
 
 CURPOS = "\033[{};{}f"  # Cursor positioning command
                     # Note: Be aware of the format to include Row and Collumn
-
-
-
 

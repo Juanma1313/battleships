@@ -15,6 +15,46 @@ from battleships_classes import *    # import battleships classes
 PLAYER_SHIPS = [Carrier, Battleship, Destroyer, Submarine, Patrol_Boat]
 COMPUTER_SHIPS = [Carrier, Battleship, Destroyer, Submarine, Patrol_Boat]
 
+def display_status(battle_zone):
+    ''' calculates the statistics about the ships for the player and the
+    computer and outputs them to the console.
+    '''
+    player_status_header = f"{battle_zone.name} Status".center(battle_zone.columns*3)+C_NORMAL
+    computer_status_header = f"Enemy Status".center(battle_zone.columns*3)+C_NORMAL
+    print (f" {C_STATUS_HEADER_ROW} {player_status_header}   {C_STATUS_HEADER_ROW}{computer_status_header}")
+    #prepare the enemy battleship list
+    enemy_units_hit=0
+    enemy_battleships_sunk=[]
+    for shot in battle_zone.fired_shots:
+        if battle_zone.fired_shots[shot][0] == RESULT_HIT: # found a hit
+            enemy_units_hit+=1
+        elif battle_zone.fired_shots[shot][0] == RESULT_SUNK: # found a SUNK
+            #add the battleship designation to the sunk list
+            enemy_battleships_sunk.append(battle_zone.fired_shots[shot][1])
+
+
+    for index in range(len(battle_zone.ships)):
+        # Prepare the player status line
+        ship=battle_zone.ships[index]
+        designation=ship.designation
+        if ship.sunk:
+            status=f"{C_STATUS_SUNK} SUNK {C_STATUS_PANEL}"
+        elif not ship.hits:
+            status=f"{C_STATUS_OK} 100% {C_STATUS_PANEL}"
+        else:
+            status=f"{C_STATUS_HIT} {100-ship.hits*100//ship.size:3}% {C_STATUS_PANEL}"
+        player_status_line= f"{C_STATUS_DESIGNATION}{designation.ljust(15)} {status}"+"".ljust(battle_zone.columns*3-22)
+        # Prepare the Enemy status line
+        if len(enemy_battleships_sunk)>index:
+            designation=enemy_battleships_sunk[index]
+            status=f"{C_STATUS_SUNK} SUNK {C_STATUS_PANEL}"
+            computer_status_line=f"{C_STATUS_DESIGNATION}{designation.ljust(15)} {status}"+"".ljust(battle_zone.columns*3-22)
+        else:
+            computer_status_line=f"{C_STATUS_PANEL}"+"".ljust(battle_zone.columns*3)
+
+        print (f" {C_STATUS_PANEL} {player_status_line}{C_NORMAL}   {C_STATUS_PANEL}{computer_status_line}{C_NORMAL}")
+
+
 def display_grids(battle_zone):
     ''' Translates the internal representation in the battle_zone object to the
     display representation and outputs the information to the console.
@@ -62,7 +102,7 @@ def display_battle_zone(battle_zone):
     that create each individual segment of the screen
     '''
     display_title(battle_zone)
-    #display_status(battle_zone)
+    display_status(battle_zone)
     display_grids(battle_zone)
 
 
@@ -319,7 +359,6 @@ def display_title(battle_zone=None):
     ''' Clears the terminal and presents the game title at the top of the
     screen.
     '''
-    global columns
     print(CLRSCR,end='')        # Clear screen
     print(CURPOS.format(1,1),end='')  # Positions the cursor to row=1, col=1
     if battle_zone:
@@ -330,15 +369,14 @@ def display_title(battle_zone=None):
     print(C_TITLE+"BATTLESHIPS".center(columns*2*3+6)+C_NORMAL)
 
 # GLOBAL VARIABLES
-player_name=None
-columns=10
-rows=10
+#player_name=None
 
 def main(args):
     ''' Presents the main menu and directs the control to the
     selected option.
     '''
-    global player_name,columns,rows
+    columns=10
+    rows=10
 
     player_name=get_player_name()
     while True:
