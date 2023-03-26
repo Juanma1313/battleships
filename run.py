@@ -20,8 +20,8 @@ def display_battle_zone(battle_zone):
     that create each individual segment of the screen
     '''
     display_title(battle_zone)
-    display_status(battle_zone)
-    display_grids(battle_zone)
+    #display_status(battle_zone)
+    #display_grids(battle_zone)
 
 
 def battleships_game(columns=10,rows=10, name="Player"):
@@ -187,13 +187,17 @@ def main_menu(name=""):
 
     return option
 
-def display_title():
+def display_title(battle_zone=None):
     ''' Clears the terminal and presents the game title at the top of the
     screen.
     '''
     global columns
     print(CLRSCR,end='')        # Clear screen
     print(CURPOS.format(1,1),end='')  # Positions the cursor to row=1, col=1
+    if battle_zone:
+        columns=battle_zone.columns
+    else:
+        columns=10
     print(C_TITLE+"".center(columns*2*3+6)+C_NORMAL)
     print(C_TITLE+"BATTLESHIPS".center(columns*2*3+6)+C_NORMAL)
 
