@@ -38,7 +38,7 @@ COLOR_MASK      = SHIP | WATER | NORMAL | EXPLODE | SUNK | MISS | SPLASH
 #COLOR_MASK      = 0x09F # 0b_0_1001_1111
 STATE_MASK      = NORMAL | EXPLODE | SUNK | MISS | SPLASH
 
-# *** Coordinate check constants
+# *** Coordinate Check Constants
 RESULT_COLUMN_ERROR =-1
 RESULT_ROW_ERROR    =-2
 RESULT_MISS         = DEFAULT
@@ -155,3 +155,4 @@ class Carrier(Ship):
     def __init__(self, coordinates, position=HORIZONTAL):
         super().__init__(coordinates, position,size=5)
         self.designation=__class__.__name__
+
