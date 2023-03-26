@@ -6,3 +6,5 @@ __pycache__/
 *.py[cod]
 node_modules/
 .github/
+result1.txt
+result2.txt
