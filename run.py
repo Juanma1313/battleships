@@ -23,8 +23,6 @@ def display_grids(battle_zone):
         at grid[0][0]
     '''
     battle_zone.update_grids()   # Update the grid and radar with any new information
-    #print("\n".join([f"{', '.join([f'0x{y:03X}' for y in x])}" for x in battle_zone.grid]))
-
     # Draws the Grid Header
     grid=battle_zone.grid
     radar=battle_zone.radar
@@ -44,7 +42,6 @@ def display_grids(battle_zone):
                 grid_row+= graph_element
             except Exception  as e:
                 grid_row+= "???"
-                #print(f"display_battle_zone(): Error: {e}\n Pos({row}, {col})={hex(element)}, Game_Colors({hex(element & COLOR_MASK)}) , board_elements({hex(element & ELEMENT_MASK)})")
             # calculate Radar column
             element = radar[row][col]
             try: # avoids the game to break if there is color or caracter set errors.
@@ -149,10 +146,6 @@ def battleships_game(columns=10,rows=10, name="Player"):
         result = RESULT_UNKNOWN
         while result != RESULT_MISS:
             result=computer_battle_zone.new_ship(ship_class)
-        #print(f"{__name__}.main({args}), Computer ship {ship_class} placed")
-
-    #display_battle_zone(computer_battle_zone) # Display battle zone
-
     # Prepare Player battle zone
     player_battle_zone = battle_zone(columns=columns, rows=rows, name=name)
     for ship_class in PLAYER_SHIPS:
@@ -201,9 +194,7 @@ def battleships_game(columns=10,rows=10, name="Player"):
             # All the Computer's  ships are sunk. End of the game
             winner = player_battle_zone
             break    # end the game # The player wins
-
-        print(f"Result={result}")
-        input("The computer will firing now, Press [return] to continue")
+        input("The computer will fire now, Press [return] to continue")
         #delay(1)
         while True: # compuer's turn loop
             coordinates = computer_battle_zone.random_coordinates()
