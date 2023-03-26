@@ -9,6 +9,9 @@ project.
 It also defines all the constats used to describe all the ships and game board
 elements internally and to be displayed at the console.
 '''
+from battleships_colors import *    # import available color commands
+from random import randrange        # import random number generators
+
 
 # *** Grid Elements Constants ***
 DEFAULT         = 0
@@ -38,7 +41,17 @@ COLOR_MASK      = SHIP | WATER | NORMAL | EXPLODE | SUNK | MISS | SPLASH
 #COLOR_MASK      = 0x09F # 0b_0_1001_1111
 STATE_MASK      = NORMAL | EXPLODE | SUNK | MISS | SPLASH
 
-# *** Coordinate Check Constants
+# *** Element/State Colors ***
+Game_Colors={
+    WATER | NORMAL  : C_WATER_NORMAL,
+    WATER | SPLASH  : C_WATER_SPLASH,
+    WATER | MISS    : C_WATER_MISS,
+    SHIP | NORMAL   : C_SHIP_NORMAL,
+    SHIP | EXPLODE  : C_SHIP_EXPLODE,
+    SHIP | SUNK     : C_SHIP_SUNK}
+
+
+# *** Coordinate check constants
 RESULT_COLUMN_ERROR =-1
 RESULT_ROW_ERROR    =-2
 RESULT_MISS         = DEFAULT
@@ -46,7 +59,6 @@ RESULT_HIT          = 1
 RESULT_SUNK         = 2
 RESULT_DUPLICATED   = 3
 RESULT_UNKNOWN      = 10
-
 
 # *** Ships classes
 class Ship():
