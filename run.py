@@ -9,6 +9,7 @@ It holds also all the console-user interaction and the main game logic.
 '''
 from time import sleep as delay     # delay in seconds to allow player to read screens
 from battleships_colors import *    # import available color commands
+from battleships_classes import *    # import battleships classes
 
 
 def battleships_game(columns=10,rows=10, name="Player"):
