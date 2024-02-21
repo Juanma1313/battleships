@@ -1,36 +1,506 @@
-{'test_receive_shot': {'Test_number': 1, 'Name': 'COLUMN ERROR (too low)', 'Result': 'OK', 'Coordinates': (0, 1), 'Expected_result': -1, 'Actual_result': -1, 'Ship': 'None'}}
-{'test_receive_shot': {'Test_number': 2, 'Name': 'COLUMN ERROR (too high)', 'Result': 'OK', 'Coordinates': (11, 1), 'Expected_result': -1, 'Actual_result': -1, 'Ship': 'None'}}
-{'test_receive_shot': {'Test_number': 3, 'Name': 'ROW ERROR (too low)', 'Result': 'OK', 'Coordinates': (1, 0), 'Expected_result': -2, 'Actual_result': -2, 'Ship': 'None'}}
-{'test_receive_shot': {'Test_number': 4, 'Name': 'ROW ERROR (too high)', 'Result': 'OK', 'Coordinates': (1, 11), 'Expected_result': -2, 'Actual_result': -2, 'Ship': 'None'}}
-{'test_receive_shot': {'Test_number': 5, 'Name': 'ROW/COLUMN ERROR', 'Result': 'OK', 'Coordinates': (0, 0), 'Expected_result': -1, 'Actual_result': -1, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 6, 'Name': 'MISS (top-left)', 'Result': 'OK', 'Coordinates': (1, 1), 'Expected_result': 0, 'Actual_result': 0, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 7, 'Name': 'Duplicated shot', 'Result': 'OK', 'Coordinates': (1, 1), 'Expected_result': 3, 'Actual_result': 3, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 8, 'Name': 'MISS (top-right)', 'Result': 'OK', 'Coordinates': (10, 1), 'Expected_result': 0, 'Actual_result': 0, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 9, 'Name': 'MISS (bottom-left)', 'Result': 'OK', 'Coordinates': (1, 10), 'Expected_result': 0, 'Actual_result': 0, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 10, 'Name': 'MISS (bottom-right)', 'Result': 'OK', 'Coordinates': (10, 10), 'Expected_result': 0, 'Actual_result': 0, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 11, 'Name': 'MISS Battleship (left)', 'Result': 'OK', 'Coordinates': (4, 5), 'Expected_result': 0, 'Actual_result': 0, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 12, 'Name': 'MISS Battleship (right)', 'Result': 'OK', 'Coordinates': (9, 5), 'Expected_result': 0, 'Actual_result': 0, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 13, 'Name': 'MISS Battleship (up)', 'Result': 'OK', 'Coordinates': (5, 4), 'Expected_result': 0, 'Actual_result': 0, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 14, 'Name': 'MISS Battleship (dow)', 'Result': 'OK', 'Coordinates': (5, 6), 'Expected_result': 0, 'Actual_result': 0, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 15, 'Name': 'ROW/COLUMN ERROR', 'Result': 'OK', 'Coordinates': (0, 0), 'Expected_result': -1, 'Actual_result': -1, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 16, 'Name': 'ROW ERROR (too high)', 'Result': 'OK', 'Coordinates': (1, 11), 'Expected_result': -2, 'Actual_result': -2, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 17, 'Name': 'COLUMN ERROR (too high)', 'Result': 'OK', 'Coordinates': (11, 1), 'Expected_result': -1, 'Actual_result': -1, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 18, 'Name': 'MISS Patrol_Boat (left)', 'Result': 'OK', 'Coordinates': (1, 2), 'Expected_result': 0, 'Actual_result': 0, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 19, 'Name': 'HIT unit 1 Patrol_Boat', 'Result': 'OK', 'Coordinates': (2, 2), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Patrol_Boat'}}
-{'fire_shot': {'Test_number': 20, 'Name': 'HIT unit 2 Patrol_Boat, SUNK', 'Result': 'OK', 'Coordinates': (2, 3), 'Expected_result': 2, 'Actual_result': 2, 'Ship': 'Patrol_Boat'}}
-{'fire_shot': {'Test_number': 21, 'Name': 'HIT unit 1 Destroyer', 'Result': 'OK', 'Coordinates': (6, 7), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Destroyer'}}
-{'fire_shot': {'Test_number': 22, 'Name': 'HIT unit 2 Destroyer', 'Result': 'OK', 'Coordinates': (6, 8), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Destroyer'}}
-{'fire_shot': {'Test_number': 23, 'Name': 'HIT unit 3 Destroyer, SUNK', 'Result': 'OK', 'Coordinates': (6, 9), 'Expected_result': 2, 'Actual_result': 2, 'Ship': 'Destroyer'}}
-{'fire_shot': {'Test_number': 24, 'Name': 'HIT unit 1 Carrier', 'Result': 'OK', 'Coordinates': (2, 1), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Carrier'}}
-{'fire_shot': {'Test_number': 25, 'Name': 'HIT unit 2 Carrier', 'Result': 'OK', 'Coordinates': (3, 1), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Carrier'}}
-{'fire_shot': {'Test_number': 26, 'Name': 'HIT unit 3 Carrier', 'Result': 'OK', 'Coordinates': (4, 1), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Carrier'}}
-{'fire_shot': {'Test_number': 27, 'Name': 'HIT unit 4 Carrier', 'Result': 'OK', 'Coordinates': (5, 1), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Carrier'}}
-{'fire_shot': {'Test_number': 28, 'Name': 'HIT unit 5 Carrier, SUNK', 'Result': 'OK', 'Coordinates': (6, 1), 'Expected_result': 2, 'Actual_result': 2, 'Ship': 'Carrier'}}
-{'fire_shot': {'Test_number': 29, 'Name': 'HIT unit 5 Submarine', 'Result': 'OK', 'Coordinates': (10, 7), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Submarine'}}
-{'fire_shot': {'Test_number': 30, 'Name': 'HIT unit 5 Submarine', 'Result': 'OK', 'Coordinates': (10, 8), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Submarine'}}
-{'fire_shot': {'Test_number': 31, 'Name': 'HIT unit 5 Submarine, SUNK', 'Result': 'OK', 'Coordinates': (10, 9), 'Expected_result': 2, 'Actual_result': 2, 'Ship': 'Submarine'}}
-{'fire_shot': {'Test_number': 32, 'Name': 'HIT unit 1 Battleship', 'Result': 'OK', 'Coordinates': (5, 5), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Battleship'}}
-{'fire_shot': {'Test_number': 33, 'Name': 'Duplicated shot', 'Result': 'OK', 'Coordinates': (5, 5), 'Expected_result': 3, 'Actual_result': 3, 'Ship': 'None'}}
-{'fire_shot': {'Test_number': 34, 'Name': 'HIT unit 2 Battleship', 'Result': 'OK', 'Coordinates': (6, 5), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Battleship'}}
-{'fire_shot': {'Test_number': 35, 'Name': 'HIT unit 3 Battleship', 'Result': 'OK', 'Coordinates': (7, 5), 'Expected_result': 1, 'Actual_result': 1, 'Ship': 'Battleship'}}
-{'fire_shot': {'Test_number': 36, 'Name': 'HIT unit 4 Battleship, SUNK', 'Result': 'OK', 'Coordinates': (8, 5), 'Expected_result': 2, 'Actual_result': 2, 'Ship': 'Battleship'}}
+[
+    {
+        "test_receive_shot": {
+            "Test_number": 1,
+            "Name": "COLUMN ERROR (too low)",
+            "Result": "OK",
+            "Coordinates": [
+                0,
+                1
+            ],
+            "Expected_result": -1,
+            "Actual_result": -1,
+            "Ship": "None"
+        }
+    },
+    {
+        "test_receive_shot": {
+            "Test_number": 2,
+            "Name": "COLUMN ERROR (too high)",
+            "Result": "OK",
+            "Coordinates": [
+                11,
+                1
+            ],
+            "Expected_result": -1,
+            "Actual_result": -1,
+            "Ship": "None"
+        }
+    },
+    {
+        "test_receive_shot": {
+            "Test_number": 3,
+            "Name": "ROW ERROR (too low)",
+            "Result": "OK",
+            "Coordinates": [
+                1,
+                0
+            ],
+            "Expected_result": -2,
+            "Actual_result": -2,
+            "Ship": "None"
+        }
+    },
+    {
+        "test_receive_shot": {
+            "Test_number": 4,
+            "Name": "ROW ERROR (too high)",
+            "Result": "OK",
+            "Coordinates": [
+                1,
+                11
+            ],
+            "Expected_result": -2,
+            "Actual_result": -2,
+            "Ship": "None"
+        }
+    },
+    {
+        "test_receive_shot": {
+            "Test_number": 5,
+            "Name": "ROW/COLUMN ERROR",
+            "Result": "OK",
+            "Coordinates": [
+                0,
+                0
+            ],
+            "Expected_result": -1,
+            "Actual_result": -1,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 6,
+            "Name": "MISS (top-left)",
+            "Result": "OK",
+            "Coordinates": [
+                1,
+                1
+            ],
+            "Expected_result": 0,
+            "Actual_result": 0,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 7,
+            "Name": "Duplicated shot",
+            "Result": "OK",
+            "Coordinates": [
+                1,
+                1
+            ],
+            "Expected_result": 3,
+            "Actual_result": 3,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 8,
+            "Name": "MISS (top-right)",
+            "Result": "OK",
+            "Coordinates": [
+                10,
+                1
+            ],
+            "Expected_result": 0,
+            "Actual_result": 0,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 9,
+            "Name": "MISS (bottom-left)",
+            "Result": "OK",
+            "Coordinates": [
+                1,
+                10
+            ],
+            "Expected_result": 0,
+            "Actual_result": 0,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 10,
+            "Name": "MISS (bottom-right)",
+            "Result": "OK",
+            "Coordinates": [
+                10,
+                10
+            ],
+            "Expected_result": 0,
+            "Actual_result": 0,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 11,
+            "Name": "MISS Battleship (left)",
+            "Result": "OK",
+            "Coordinates": [
+                4,
+                5
+            ],
+            "Expected_result": 0,
+            "Actual_result": 0,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 12,
+            "Name": "MISS Battleship (right)",
+            "Result": "OK",
+            "Coordinates": [
+                9,
+                5
+            ],
+            "Expected_result": 0,
+            "Actual_result": 0,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 13,
+            "Name": "MISS Battleship (up)",
+            "Result": "OK",
+            "Coordinates": [
+                5,
+                4
+            ],
+            "Expected_result": 0,
+            "Actual_result": 0,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 14,
+            "Name": "MISS Battleship (dow)",
+            "Result": "OK",
+            "Coordinates": [
+                5,
+                6
+            ],
+            "Expected_result": 0,
+            "Actual_result": 0,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 15,
+            "Name": "ROW/COLUMN ERROR",
+            "Result": "OK",
+            "Coordinates": [
+                0,
+                0
+            ],
+            "Expected_result": -1,
+            "Actual_result": -1,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 16,
+            "Name": "ROW ERROR (too high)",
+            "Result": "OK",
+            "Coordinates": [
+                1,
+                11
+            ],
+            "Expected_result": -2,
+            "Actual_result": -2,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 17,
+            "Name": "COLUMN ERROR (too high)",
+            "Result": "OK",
+            "Coordinates": [
+                11,
+                1
+            ],
+            "Expected_result": -1,
+            "Actual_result": -1,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 18,
+            "Name": "MISS Patrol_Boat (left)",
+            "Result": "OK",
+            "Coordinates": [
+                1,
+                2
+            ],
+            "Expected_result": 0,
+            "Actual_result": 0,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 19,
+            "Name": "HIT unit 1 Patrol_Boat",
+            "Result": "OK",
+            "Coordinates": [
+                2,
+                2
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Patrol_Boat"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 20,
+            "Name": "HIT unit 2 Patrol_Boat, SUNK",
+            "Result": "OK",
+            "Coordinates": [
+                2,
+                3
+            ],
+            "Expected_result": 2,
+            "Actual_result": 2,
+            "Ship": "Patrol_Boat"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 21,
+            "Name": "HIT unit 1 Destroyer",
+            "Result": "OK",
+            "Coordinates": [
+                6,
+                7
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Destroyer"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 22,
+            "Name": "HIT unit 2 Destroyer",
+            "Result": "OK",
+            "Coordinates": [
+                6,
+                8
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Destroyer"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 23,
+            "Name": "HIT unit 3 Destroyer, SUNK",
+            "Result": "OK",
+            "Coordinates": [
+                6,
+                9
+            ],
+            "Expected_result": 2,
+            "Actual_result": 2,
+            "Ship": "Destroyer"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 24,
+            "Name": "HIT unit 1 Carrier",
+            "Result": "OK",
+            "Coordinates": [
+                2,
+                1
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Carrier"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 25,
+            "Name": "HIT unit 2 Carrier",
+            "Result": "OK",
+            "Coordinates": [
+                3,
+                1
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Carrier"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 26,
+            "Name": "HIT unit 3 Carrier",
+            "Result": "OK",
+            "Coordinates": [
+                4,
+                1
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Carrier"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 27,
+            "Name": "HIT unit 4 Carrier",
+            "Result": "OK",
+            "Coordinates": [
+                5,
+                1
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Carrier"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 28,
+            "Name": "HIT unit 5 Carrier, SUNK",
+            "Result": "OK",
+            "Coordinates": [
+                6,
+                1
+            ],
+            "Expected_result": 2,
+            "Actual_result": 2,
+            "Ship": "Carrier"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 29,
+            "Name": "HIT unit 5 Submarine",
+            "Result": "OK",
+            "Coordinates": [
+                10,
+                7
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Submarine"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 30,
+            "Name": "HIT unit 5 Submarine",
+            "Result": "OK",
+            "Coordinates": [
+                10,
+                8
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Submarine"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 31,
+            "Name": "HIT unit 5 Submarine, SUNK",
+            "Result": "OK",
+            "Coordinates": [
+                10,
+                9
+            ],
+            "Expected_result": 2,
+            "Actual_result": 2,
+            "Ship": "Submarine"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 32,
+            "Name": "HIT unit 1 Battleship",
+            "Result": "OK",
+            "Coordinates": [
+                5,
+                5
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Battleship"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 33,
+            "Name": "Duplicated shot",
+            "Result": "OK",
+            "Coordinates": [
+                5,
+                5
+            ],
+            "Expected_result": 3,
+            "Actual_result": 3,
+            "Ship": "None"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 34,
+            "Name": "HIT unit 2 Battleship",
+            "Result": "OK",
+            "Coordinates": [
+                6,
+                5
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Battleship"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 35,
+            "Name": "HIT unit 3 Battleship",
+            "Result": "OK",
+            "Coordinates": [
+                7,
+                5
+            ],
+            "Expected_result": 1,
+            "Actual_result": 1,
+            "Ship": "Battleship"
+        }
+    },
+    {
+        "fire_shot": {
+            "Test_number": 36,
+            "Name": "HIT unit 4 Battleship, SUNK",
+            "Result": "OK",
+            "Coordinates": [
+                8,
+                5
+            ],
+            "Expected_result": 2,
+            "Actual_result": 2,
+            "Ship": "Battleship"
+        }
+    }
+]

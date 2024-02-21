@@ -12,7 +12,7 @@ It produces 2 report files. one for the player side and other for the Computer
 side, with the result of all the performed tests.
 '''
 import time
-from run import *
+from battleships import *
 
 class Tests:
     ''' Performs automated tests and stores and verifies results
@@ -24,8 +24,8 @@ class Tests:
         battle_zone_1 = Mandatory battle zone for all tests (normaly the player)
         battle_zone_2 = Only needed for fire_shot tests (normaly the computer)
         display= specifies which battle field to display (0=None)
-        wait= False --> Do not wait between results
-        wait=True   --> request user to press ENTER after each test
+        wait= False    --> Do not wait between results
+        wait= True     --> request user to press ENTER after each test
         wait= [number] --> Waits [number] seconds after each test'''
 
     def __init__(self, battle_zone_1, battle_zone_2=None , display=1, wait =True):
@@ -201,16 +201,23 @@ def main(args):
     # Print totals to screen
 
     print(f"Totals:  Tests= {tests.test_number}, Errors={tests.test_errors}")
-    #import json
+    import json
     with open("results1.txt", mode='w') as f:
-        for test_info in tests.test_results1:
-            print(f"{test_info}", file=f)
+        json.dump(tests.test_results1, f,indent=4)
+# If we want raw data from test_results1 dictionarie, uncomment the following two lines
+#        for test_info in tests.test_results1: 
+#            print(f"{test_info}", file=f)
+        f.close()
 
     with open("results2.txt", mode='w') as f:
-        for test_info in tests.test_results2:
-            print(f"{test_info}", file=f)
+        json.dump(tests.test_results2, f,indent=4)
+# If we want raw data from test_results2 dictionarie, uncomment the following two lines
+#        for test_info in tests.test_results2:
+#            print(f"{test_info}", file=f)
+        f.close()
 
     return 0
+
 
 
 if __name__ == '__main__':
