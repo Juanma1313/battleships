@@ -36,48 +36,50 @@ EXPLODE         = 0x01  # 0b_0_0000_0001
 SUNK            = 0x03  # 0b_0_0000_0011
 
 ELEMENT_MASK    = RADAR | HORIZONTAL | VERTICAL | SHIP | DECK | BOW | STERN | WATER | MISS | SPLASH
-#ELEMENT_MASK    = 0x1FC # 0b_1_1111_1100
+# ELEMENT_MASK  = 0x1FC # 0b_1_1111_1100
 COLOR_MASK      = SHIP | WATER | NORMAL | EXPLODE | SUNK | MISS | SPLASH
-#COLOR_MASK      = 0x09F # 0b_0_1001_1111
+# COLOR_MASK    = 0x09F # 0b_0_1001_1111
 STATE_MASK      = NORMAL | EXPLODE | SUNK | MISS | SPLASH
 
 # *** Element/State Colors ***
-Game_Colors={
-    WATER | NORMAL  : C_WATER_NORMAL,
-    WATER | SPLASH  : C_WATER_SPLASH,
-    WATER | MISS    : C_WATER_MISS,
-    SHIP | NORMAL   : C_SHIP_NORMAL,
-    SHIP | EXPLODE  : C_SHIP_EXPLODE,
-    SHIP | SUNK     : C_SHIP_SUNK}
+Game_Colors = {
+    WATER | NORMAL: C_WATER_NORMAL,
+    WATER | SPLASH: C_WATER_SPLASH,
+    WATER | MISS:   C_WATER_MISS,
+    SHIP | NORMAL:  C_SHIP_NORMAL,
+    SHIP | EXPLODE: C_SHIP_EXPLODE,
+    SHIP | SUNK:    C_SHIP_SUNK
+    }
 
 # *** Board elements ***
 CHARSET = 0 # Default character set
 if CHARSET == 0:
    # define character set/colors when using a base console
-    board_elements={
-        WATER | NORMAL              : ' . ',
-        WATER | SPLASH              : ' * ',
-        WATER | MISS                : ' X ',
-        HORIZONTAL | SHIP | DECK    : '\u2588\u2588\u2588',
-        HORIZONTAL | SHIP | BOW     : ' \u25c4\u2588',
-        HORIZONTAL | SHIP | STERN   : '\u2588\u25ba ',
-        VERTICAL   | SHIP | DECK    : '  \u2588',
-        VERTICAL   | SHIP | BOW     : '  \u25b2',
-        VERTICAL   | SHIP | STERN   : '  \u25bc',
-        RADAR      | SHIP           : '\u2590\u2588\u258c'}
+    board_elements = {
+        WATER | NORMAL:             ' . ',
+        WATER | SPLASH:             ' * ',
+        WATER | MISS:               ' X ',
+        HORIZONTAL | SHIP | DECK:   '\u2588\u2588\u2588',
+        HORIZONTAL | SHIP | BOW:    ' \u25c4\u2588',
+        HORIZONTAL | SHIP | STERN:  '\u2588\u25ba ',
+        VERTICAL   | SHIP | DECK:   '  \u2588',
+        VERTICAL   | SHIP | BOW:    '  \u25b2',
+        VERTICAL   | SHIP | STERN:  '  \u25bc',
+        RADAR      | SHIP:          '\u2590\u2588\u258c'
+        }
 else:
    # define character set/colors when using an enhanced console
-    board_elements={
-        WATER | NORMAL              : ' · ',
-        WATER | SPLASH              : ' * ',
-        WATER | MISS                : ' X ',
-        HORIZONTAL | SHIP | DECK    : ESCSEQ+S_UNDERLINED+'m\u00af\u00af\u00af',
-        HORIZONTAL | SHIP | BOW     : '  <',
-        HORIZONTAL | SHIP | STERN   : ESCSEQ+S_UNDERLINED+'m\u00af\u00af'+ESCSEQ+S_UNDERLINED+'m]',
-        VERTICAL   | SHIP | DECK    : ' \u2502\u2502',
-        VERTICAL   | SHIP | BOW     : ' /\\',
-        VERTICAL   | SHIP | STERN   : ' \u2514\u2518',
-        RADAR      | SHIP           : '\u2590\u2588\u258c'}
+    board_elements = {
+        WATER | NORMAL:             ' · ',
+        WATER | SPLASH:             ' * ',
+        WATER | MISS:               ' X ',
+        HORIZONTAL | SHIP | DECK:   ESCSEQ + S_UNDERLINED + 'm\u00af\u00af\u00af',
+        HORIZONTAL | SHIP | BOW:    '  <',
+        HORIZONTAL | SHIP | STERN:  ESCSEQ + S_UNDERLINED + 'm\u00af\u00af' + ESCSEQ + S_UNDERLINED + 'm]',
+        VERTICAL   | SHIP | DECK:   ' \u2502\u2502',
+        VERTICAL   | SHIP | BOW:    ' /\\',
+        VERTICAL   | SHIP | STERN:  ' \u2514\u2518',
+        RADAR      | SHIP:          '\u2590\u2588\u258c'}
 
 # *** Coordinate check constants
 RESULT_COLUMN_ERROR =-1
@@ -129,35 +131,31 @@ class Ship():
         '''Test if a part of the ship is in the coordinates
         '''
         result = RESULT_MISS
-        if self.position==HORIZONTAL:
-            if (self.column <= coordinates[0] < self.column+self.size) and (self.row==coordinates[1]):
-                #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), Horizontal Hit detected")
+        if self.position == HORIZONTAL:
+            if (self.column <= coordinates[0] < self.column+self.size) and (self.row == coordinates[1]):
                 result=RESULT_HIT
         else:
-            if (self.row <= coordinates[1] < self.row+self.size) and (self.column==coordinates[0]):
-                #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), Vertical Hit detected")
-                result=RESULT_HIT
-        #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), ship={self.designation}, result={result}")
+            if (self.row <= coordinates[1] < self.row+self.size) and (self.column == coordinates[0]):
+                result = RESULT_HIT
         return result
 
     def receive_shot(self, coordinates):
         result=self.check_coordinates(coordinates)
-        if result==RESULT_HIT:
-            self.hits+=1
-            if self.position==HORIZONTAL:
+        if result == RESULT_HIT:
+            self.hits += 1
+            if self.position == HORIZONTAL:
                  # get the damaged unit from delta column
-                unit=coordinates[0]-self.column
+                unit = coordinates[0] - self.column
             else:
                  # get the damaged unit from delta row
-                unit=coordinates[1]-self.row    # get the damaged unit
+                unit = coordinates[1] - self.row    # get the damaged unit
 
-            self.units[unit]|=EXPLODE    # Sets the unit on fire
+            self.units[unit] |= EXPLODE    # Sets the unit on fire
 
-            #if sum([(unit & EXPLODE)//EXPLODE for unit in self.units])==self.size:
-            if self.hits>=self.size:
+            if self.hits >= self.size:
                 ## All units are exploded or sunk
-                self.sunk=True
-                result=RESULT_SUNK  # Sip is sunk
+                self.sunk = True
+                result = RESULT_SUNK  # Sip is sunk
         return result
 
 
@@ -166,35 +164,35 @@ class Patrol_Boat(Ship):
     size = 2
     def __init__(self, coordinates, position=HORIZONTAL):
         super().__init__(coordinates, position,size=2)
-        self.designation=__class__.__name__
+        self.designation = __class__.__name__
 
 class Submarine(Ship):
     ''' Ship subclass to define a Submarine '''
     size = 3
     def __init__(self, coordinates, position=HORIZONTAL):
-        super().__init__(coordinates, position,size=3)
-        self.designation=__class__.__name__
+        super().__init__(coordinates, position, size=3)
+        self.designation = __class__.__name__
 
 class Destroyer(Ship):
     ''' Ship subclass to define a Destroyer '''
     size = 3
     def __init__(self, coordinates, position=HORIZONTAL):
-        super().__init__(coordinates, position,size=3)
-        self.designation=__class__.__name__
+        super().__init__(coordinates, position, size=3)
+        self.designation = __class__.__name__
 
 class Battleship(Ship):
     ''' Ship subclass to define a Battleship '''
     size = 4
     def __init__(self, coordinates, position=HORIZONTAL):
-        super().__init__(coordinates, position,size=4)
-        self.designation=__class__.__name__
+        super().__init__(coordinates, position, size=4)
+        self.designation = __class__.__name__
 
 class Carrier(Ship):
     ''' Ship subclass to define a Carrier '''
     size = 5
     def __init__(self, coordinates, position=HORIZONTAL):
-        super().__init__(coordinates, position,size=5)
-        self.designation=__class__.__name__
+        super().__init__(coordinates, position, size=5)
+        self.designation = __class__.__name__
 
 class battle_zone():
     ''' Mantains the information of the status of a player's board.
@@ -204,17 +202,17 @@ class battle_zone():
     the player has fired.
     '''
     def __init__(self, columns=10, rows=10, name="Computer"):
-        self.ships=[]
-        self.fired_shots={}
-        self.received_shots={} # dictionary to store received shots
+        self.ships = []
+        self.fired_shots = {}
+        self.received_shots = {} # dictionary to store received shots
                      # {(column, row):coordinate:result, ship, element}
-        self.name=name
-        self.columns=columns
-        self.rows=rows
+        self.name = name
+        self.columns = columns
+        self.rows = rows
         # Create the bidimentional array for the grid
-        self.grid=[ [WATER for x in range(columns)] for x in range(rows)]
+        self.grid = [[WATER for x in range(columns)] for x in range(rows)]
         # Create the bidimentional array for the radar
-        self.radar=[ [WATER for x in range(columns)] for x in range(rows)]
+        self.radar = [[WATER for x in range(columns)] for x in range(rows)]
 
     def update_grids(self):
         ''' updates the information of the two dimensional grid to represent
@@ -234,33 +232,33 @@ class battle_zone():
             #print(f"Column={ship.column}, Row={ship.row}, Size={ship.size}, Units={ship.units}")
             for i in range(ship.size):
                 # Calculate the coordenates for each ship element
-                (column, row)  = (ship.column-1, ship.row+i-1) if ship.position==VERTICAL else (ship.column+i-1, ship.row-1)
+                (column, row)  = (ship.column - 1, ship.row + i - 1) if ship.position == VERTICAL else (ship.column + i - 1, ship.row - 1)
                 # Place each ship unit on the grid
-                self.grid[row][column]=ship.units[i]
+                self.grid[row][column] = ship.units[i]
 
         # Loop throughout all the received shots to represent them on the grid
         for shot in self.received_shots:
             if self.received_shots[shot][2] in [MISS, EXPLODE, SUNK, SPLASH]:
                 # update explosion state to grid cell.
-                column = shot[0]-1
-                row    = shot[1]-1
-                self.grid[row][column]&= ~STATE_MASK # delete explosion state in grid
-                self.grid[row][column]|=self.received_shots[shot][2] # Set new state
+                column = shot[0] - 1
+                row    = shot[1] - 1
+                self.grid[row][column] &= ~STATE_MASK # delete explosion state in grid
+                self.grid[row][column] |= self.received_shots[shot][2] # Set new state
         # Loop throughout all the fired  shots to represent them on the radar
         for shot in self.fired_shots:
             if self.fired_shots[shot][2] in [MISS, EXPLODE, SUNK, SPLASH]:
                 # update explosion state to grid cell.
-                column = shot[0]-1
-                row    = shot[1]-1
-                self.radar[row][column]&= ~STATE_MASK # delete explosion state in radar
+                column = shot[0] - 1
+                row    = shot[1] - 1
+                self.radar[row][column] &= ~STATE_MASK # delete explosion state in radar
                 if self.fired_shots[shot][2] in [EXPLODE, SUNK]:
                      # ship was hit by this shot
                      element = RADAR | SHIP
                 else:
                      # water was hit by this shot
-                     element=self.radar[row][column]
-                self.radar[row][column]= element # define radar element
-                self.radar[row][column]|=self.fired_shots[shot][2] # Set new state
+                     element = self.radar[row][column]
+                self.radar[row][column] = element # define radar element
+                self.radar[row][column] |= self.fired_shots[shot][2] # Set new state
 
     def update_explosions(self):
         '''Scans the fired and received shots to replace SPLASH and EXPLODE with
@@ -268,20 +266,20 @@ class battle_zone():
         '''
         # Updates exploding Received shots for display in Radar
         for shot in self.received_shots:
-            if self.received_shots[shot][2]==EXPLODE:
+            if self.received_shots[shot][2] == EXPLODE:
                 # change explosion with sunk
-                self.received_shots[shot][2]=SUNK
-            if self.received_shots[shot][2]==SPLASH:
+                self.received_shots[shot][2] = SUNK
+            if self.received_shots[shot][2] == SPLASH:
                 # change explosion and splash to sunk and miss .
-                self.received_shots[shot][2]=MISS
+                self.received_shots[shot][2] = MISS
         # Updates exploding Fired shots for display in Radar
         for shot in self.fired_shots:
-            if self.fired_shots[shot][2]==EXPLODE:
+            if self.fired_shots[shot][2] == EXPLODE:
                 # change explosion with sunk
-                self.fired_shots[shot][2]=SUNK
-            if self.fired_shots[shot][2]==SPLASH:
+                self.fired_shots[shot][2] = SUNK
+            if self.fired_shots[shot][2] == SPLASH:
                 # change explosion and splash to sunk and miss .
-                self.fired_shots[shot][2]=MISS
+                self.fired_shots[shot][2] = MISS
 
     def check_coordinates(self,coordinates):
         ''' Returns the result of a hipotetical fire solution.
@@ -290,7 +288,7 @@ class battle_zone():
         result = RESULT_UNKNOWN
         ship=None
         # Validates coordinates
-        column=coordinates[0]
+        column = coordinates[0]
         row = coordinates[1]
         if not (1 <= column <= self.columns):
             #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), Column error")
@@ -302,7 +300,7 @@ class battle_zone():
             result = RESULT_MISS
         else:   # There are ships defined, then checks for ship collission
             for ship in self.ships:
-                result= ship.check_coordinates(coordinates)
+                result = ship.check_coordinates(coordinates)
                 if result != RESULT_MISS:
                     #print(f"{__class__.__name__}.check_coordinates(coordinates={coordinates}), Collition detected, Result={result}")
                     break
@@ -316,15 +314,13 @@ class battle_zone():
         ''' tests that the ship coordinates and boundaries are correct and there is no collission
         with an existing ship
         '''
-        #print(f"{__class__.__name__}.validate_ship({ship}),  coordinates={ship.coordinates}, position={ship.position}")
         result=RESULT_UNKNOWN
         for i in range(ship.size):
             if ship.position == VERTICAL:
                 result, other_ship =self.check_coordinates([ship.column, ship.row+i])
             else:
                 result, other_ship=self.check_coordinates([ship.column+i, ship.row])
-            if result!=RESULT_MISS:
-                #print(f"{__class__.__name__}.validate_chip({ship}), Collition detected at element[{i}], Result={result}, ship={other_ship}")
+            if result != RESULT_MISS:
                 break
         return result
 
@@ -333,16 +329,14 @@ class battle_zone():
         If provided, It verifyes coordinates and boundaries and check for collissions.
         if not provided, generates random position and coordenates
         '''
-        #print(f"{__class__.__name__}.new_ship({ship_class}),  coordinates={ship.coordinates}, position={ship.position}")
         if position == None:
-            position=self.random_position
-        if not coordinates: # if not provided define random coordinates for the ship
-            coordinates=self.random_coordinates(ship_class.size, position)
-        ship=ship_class(coordinates=coordinates, position=position)
+            position = self.random_position
+        if not coordinates:     # if not provided define random coordinates for the ship
+            coordinates = self.random_coordinates(ship_class.size, position)
+        ship = ship_class(coordinates=coordinates, position=position)
         result = self.validate_ship(ship)
         if result == RESULT_MISS:
-            self.ships+=[ship]
-        #print(f"{__class__.__name__}.new_ship({ship_class}),  ship={ship}, coordinates={ship.coordinates}, position={ship.position}")
+            self.ships += [ship]
         return result
 
     def random_coordinates(self, size=None, position=None):
@@ -351,19 +345,19 @@ class battle_zone():
             and position
         '''
         if not size:    # Requested a generic coordinate for fire solution.
-            result= (randrange(1, self.columns+1), randrange(1, self.rows+1))
+            result = (randrange(1, self.columns + 1), randrange(1, self.rows + 1))
         else:           # Requested coordinates for new ship
-            if position==VERTICAL:    # The ships position is vertical, limit the column coordinate
-                result= (randrange(1, self.columns), randrange(1, self.rows-size+2))
+            if position == VERTICAL:    # The ships position is vertical, limit the column coordinate
+                result = (randrange(1, self.columns), randrange(1, self.rows-size + 2))
             else:                     # The ships position is horizontal, limit the raw coordinate
-                result= (randrange(1, self.columns-size+2), randrange(1, self.rows))
+                result = (randrange(1, self.columns-size + 2), randrange(1, self.rows))
         return result
 
     @property
     def random_position(self):
         '''Returns randomly HORIZONTAL or VERTICAL position
         '''
-        return HORIZONTAL if randrange(0, 2)==0 else VERTICAL
+        return HORIZONTAL if randrange(0, 2) == 0 else VERTICAL
 
 
     def receive_shot(self, coordinates):
@@ -376,29 +370,27 @@ class battle_zone():
         Every shot is stored in the received_shots list for further processing.
         '''
         result = RESULT_UNKNOWN
-        designation=None    # Variable to Stores name of the ship
+        designation = None    # Variable to Stores name of the ship
         if coordinates in self.received_shots:
-            result=RESULT_DUPLICATED
+            result = RESULT_DUPLICATED
         else:
             (result, ship) = self.check_coordinates(coordinates)
             if result not in [RESULT_COLUMN_ERROR, RESULT_ROW_ERROR]:
                 # The coordenates are valid, store received shot
                 if ship:
                     # There is a new hit on a ship
-                    result=ship.receive_shot(coordinates)
-                    designation=ship.designation
+                    result = ship.receive_shot(coordinates)
+                    designation = ship.designation
                     #self.received_shots.update({coordinates:[result,ship,EXPLODE]})
-                    explosion=EXPLODE
+                    explosion = EXPLODE
                 else:
                     # There is a miss, prepare splash
-                    explosion=SPLASH
-
-                self.received_shots.update({coordinates:[result,designation, explosion]})
-
-        #print(f"{__class__.__name__}.receive_shot({coordinates}),  ship={designation}, result={result}")
+                    explosion = SPLASH
+                self.received_shots.update({coordinates:[result, designation, explosion]})
         return result, designation
 
-    def fire_shot(self, coordinates, battle_zone ):
+
+    def fire_shot(self, coordinates, battle_zone):
         ''' performs all the computation needed to evaluate a fired shot
         to the enemy and it will call the receive_shot function of the enemy's
         battle_zone instance which is in charge of the data updating.
@@ -408,20 +400,18 @@ class battle_zone():
         Every shot is stored in the fired_shots list for further processing.
         '''
         result = RESULT_UNKNOWN
-        designation=None
+        designation = None
         if coordinates in self.fired_shots:
-            result=RESULT_DUPLICATED
+            result = RESULT_DUPLICATED
         else:
-            (result, designation)=battle_zone.receive_shot(coordinates)
+            (result, designation) = battle_zone.receive_shot(coordinates)
             if result not in [RESULT_COLUMN_ERROR, RESULT_ROW_ERROR]:
                 # The coordenates are valid, store fired shot
-                if designation: # There is a ship in the fired coordenates
+                if designation:     # There is a ship in the fired coordenates
                     # There is a new hit on a ship
-                    explosion=EXPLODE
+                    explosion = EXPLODE
                 else:
                     # There is a miss, prepare splash
-                    explosion=SPLASH
-                self.fired_shots.update({coordinates:[result, designation, explosion]})
-        #print(f"{__class__.__name__}.fire_shot({coordinates}),  ship={designation}, result={result}")
+                    explosion = SPLASH
+                self.fired_shots.update({coordinates: [result, designation, explosion]})
         return result, designation
-
