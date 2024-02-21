@@ -32,4 +32,4 @@ C_WATER_SPLASH      = ESCSEQ  +S_BLINK      +';'    +TC_CYAN    +';'    +BC_RED 
 C_WATER_MISS        = ESCSEQ  +S_NORMAL     +';'    +TC_BLUE    +';'    +BC_CYAN   +'m'
 C_SHIP_NORMAL       = ESCSEQ  +S_NORMAL     +';'    +TC_BLACK   +';'    +BC_CYAN   +'m'
 C_SHIP_EXPLODE      = ESCSEQ  +S_BLINK      +';'    +TC_YELLOW  +';'    +BC_RED    +'m'
-C_SHIP_SUNK         = ESCSEQ  +S_NORMAL     +';'    +TC_WHITE   +';'    +BC_CYAN  +'m'
+C_SHIP_SUNK         = ESCSEQ  +S_LIGHT      +';'    +TC_WHITE   +';'    +BC_CYAN  +'m'
