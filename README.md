@@ -2,7 +2,7 @@
 
 ## Introduction
 
-"Batleship" is an application based on the popular board game
+"Battleships" is an application based on the popular board game
 “Battleships”. This implementation has been carried out in the Python
 programming language, and is represented graphically on a computer
 terminal using text and graphic characters of the ANSI standard.
