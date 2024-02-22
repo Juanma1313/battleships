@@ -16,130 +16,63 @@ una simulación de terminal en un navegador web .
 Deseo que disfruten con esta sencilla implementación de este popular
 juego.
 
-**Tabla de Contenidos**
+## Tabla de Contenidos
 
-[Introducción](#introducción)
-
-["Batalla Naval", El juego](#batalla-naval-el-juego)
-
-[Tableros](#tableros)
-
-[Naves](#naves)
-
-[Desarrollo del juego](#desarrollo-del-juego)
-
-[Fin de la batalla (fin del juego)](#fin-de-la-batalla-fin-del-juego)
-
-[Hay ganador:](#hay-ganador)
-
-[Empate:](#empate)
-
-[Alcance del proyecto](#alcance-del-proyecto)
-
-[Diferencias con el juego original](#diferencias-con-el-juego-original)
-
-[Los jugadores:](#los-jugadores)
-
-[Los tableros:](#los-tableros)
-
-[Las Naves:](#las-naves)
-
-[El ganador:](#el-ganador)
-
-[Experiencia de usuario (UX)](#experiencia-de-usuario-ux)
-
-[Especificaciones funcionales](#especificaciones-funcionales)
-
-[Objetivos](#objetivos)
-
-[Requerimientos del usuario](#requerimientos-del-usuario)
-
-[Diseño de la interfaz de usuario
-(UI)](#diseño-de-la-interfaz-de-usuario-ui)
-
-[Lógica](#lógica)
-
-[Diagrama de flujo del menu
-principal](#diagrama-de-flujo-del-menu-principal)
-
-[Diagrama de flujo del guego](#diagrama-de-flujo-del-guego)
-
-[Diagrama de flujo del turno de
-gugador](#diagrama-de-flujo-del-turno-de-gugador)
-
-[Bocetos](#bocetos)
-
-[Implementación](#implementación)
-
-[Definición de las clases](#definición-de-las-clases)
-
-[Clase Ship():](#clase-ship)
-
-[método check\_coordinates():](#método-check_coordinates)
-
-[receive\_shot():](#receive_shot)
-
-[Clase battle\_zone():](#clase-battle_zone)
-
-[Gestión gráfica](#gestión-gráfica)
-
-[ANSI commands](#ansi-commands)
-
-[Estado actual](#estado-actual)
-
-[Pantalla de inicio y de cambio de nombre del
-jugador](#pantalla-de-inicio-y-de-cambio-de-nombre-del-jugador)
-
-[Menu principal](#menu-principal)
-
-[Pantalla de cambio de tamaño de la zona de
-batalla](#pantalla-de-cambio-de-tamaño-de-la-zona-de-batalla)
-
-[Pantalla inicial de posicionamiento de
-naves](#pantalla-inicial-de-posicionamiento-de-naves)
-
-[Pantalla final de posicionamiento de naves e inicio del
-juego](#pantalla-final-de-posicionamiento-de-naves-e-inicio-del-juego)
-
-[Pantalla del turno de disparo de la
-computadora](#pantalla-del-turno-de-disparo-de-la-computadora)
-
-[Pantalla de turno de disparo del jugador en estado avanzado del
-juego](#pantalla-de-turno-de-disparo-del-jugador-en-estado-avanzado-del-juego)
-
-[Pantalla de victoria del jugador](#pantalla-de-victoria-del-jugador)
-
-[Pantalla de derrota del jugador](#pantalla-de-derrota-del-jugador)
-
-[Mejoras futuras](#mejoras-futuras)
-
-[Crear un algoritmo predictivo](#crear-un-algoritmo-predictivo)
-
-[Permitir jugar a dos humanos
-online](#permitir-jugar-a-dos-humanos-online)
-
-[Añadir una lista de ranking](#añadir-una-lista-de-ranking)
-
-[Testing y depuración](#testing-y-depuración)
-
-[Testing automático](#testing-automático)
-
-[archivo tests.py](#archivo-tests.py)
-
-[Testing manual](#testing-manual)
-
-[Errores](#errores)
-
-[Despliegue](#despliegue)
-
-[Heroku](#heroku)
-
-[Como Clonar el respositorio a tu cuenta de
-github](#como-clonar-el-respositorio-a-tu-cuenta-de-github)
-
-[Créditos](#créditos)
-
-###   
+* [Introducción](#introducción)
+* [&#34;Batalla Naval&#34;, El juego](#batalla-naval-el-juego)
+  * [Tableros](#tableros)
+  * [Naves](#naves)
+  * [Desarrollo del juego](#desarrollo-del-juego)
+  * [Fin de la batalla (fin del juego)](#fin-de-la-batalla-fin-del-juego)
+    *[Hay ganador:](#hay-ganador)
+    *[Empate:](#empate)
+* [Alcance del proyecto](#alcance-del-proyecto)
+  * [Diferencias con el juego original](#diferencias-con-el-juego-original)
+    * [Los jugadores:](#los-jugadores)
+    * [Los tableros:](#los-tableros)
+    * [Las Naves:](#las-naves)
+    * [El ganador:](#el-ganador)
+* [Experiencia de usuario (UX)](#experiencia-de-usuario-ux)
+  * [Especificaciones funcionales](#especificaciones-funcionales)
+    * [Objetivos](#objetivos)
+    * [Requerimientos del usuario](#requerimientos-del-usuario)
+  * [Diseño de la interfaz de usuario (UI)](#diseño-de-la-interfaz-de-usuario-ui)
+    *[Lógica](#lógica)
+    * [Diagrama de flujo del menu principal](#diagrama-de-flujo-del-menu-principal)
+    * [Diagrama de flujo del guego](#diagrama-de-flujo-del-guego)
+    * [Diagrama de flujo del turno de jugador](#diagrama-de-flujo-del-turno-de-gugador)
+    * [Bocetos](#bocetos)
+* [Implementación](#implementación)
+  * [Definición de las clases](#definición-de-las-clases)
+    * [Clase Ship():](#clase-ship)
+      * [método check\_coordinates():](#método-check_coordinates)
+      * [receive\_shot():](#receive_shot)
+    * [Clase battle\_zone():](#clase-battle_zone)
+  * [Gestión gráfica](#gestión-gráfica)
+    * [ANSI commands](#ansi-commands)
+  * [Estado actual](#estado-actual)
+    * [Pantalla de inicio y de cambio de nombre del jugador](#pantalla-de-inicio-y-de-cambio-de-nombre-del-jugador)
+    * [Menu principal](#menu-principal)
+    * [Pantalla de cambio de tamaño de la zona de batalla](#pantalla-de-cambio-de-tamaño-de-la-zona-de-batalla)
+    * [Pantalla inicial de posicionamiento de naves](#pantalla-inicial-de-posicionamiento-de-naves)
+    * [Pantalla final de posicionamiento de naves e inicio del juego](#pantalla-final-de-posicionamiento-de-naves-e-inicio-del-juego)
+    * [Pantalla del turno de disparo de la computadora](#pantalla-del-turno-de-disparo-de-la-computadora)
+    * [Pantalla de turno de disparo del jugador en estado avanzado del juego](#pantalla-de-turno-de-disparo-del-jugador-en-estado-avanzado-del-juego)
+    * [Pantalla de victoria del jugador](#pantalla-de-victoria-del-jugador)
+    * [Pantalla de derrota del jugador](#pantalla-de-derrota-del-jugador)
+  * [Mejoras futuras](#mejoras-futuras)
+    * [Crear un algoritmo predictivo](#crear-un-algoritmo-predictivo)
+    * [Permitir jugar a dos humanos online](#permitir-jugar-a-dos-humanos-online)
+    * [Añadir una lista de ranking](#añadir-una-lista-de-ranking)
+* [Testing y depuración](#testing-y-depuración)
+  * [Testing automático](#testing-automático)
+    * [archivo tests.py](#archivo-tests.py)
+  * [Testing manual](#testing-manual)
+  * [Errores](#errores)
+* [Despliegue](#despliegue)
+  * [Heroku](#heroku)
+  * [Como Clonar el respositorio a tu cuenta de github](#como-clonar-el-respositorio-a-tu-cuenta-de-github)
+* [Créditos](#créditos)
 
 ## "Batalla Naval", El juego
 
@@ -161,7 +94,7 @@ diferenciando los impactos y los que dan al agua.
 ### Naves
 
 Al comenzar, cada jugador posiciona sus barcos en el primer tablero, de
-forma secreta, invisible al oponente.​
+forma secreta, invisible al oponente.
 
 Cada quien ocupa, según sus preferencias, una misma cantidad de
 casillas, horizontal y/o verticalmente, las que representan sus naves.
@@ -202,7 +135,7 @@ para los aciertos y de otro para las marras.
 
 El juego puede terminar con un ganador o en empate:
 
-#### Hay ganador: 
+#### Hay ganador:
 
 Quien destruya primero todas las naves de su oponente será el vencedor
 (como en tantos otros juegos en los que se participa por turnos, en caso
@@ -252,15 +185,11 @@ Si bien en el juego original se pueden acordar de antemano el número de
 naves, su tipo y su tamaño, en esta implementación lo hemos limitado a
 las siguientes
 
-\* Un portaviones, tamaño 5
-
-\* Un acorazado, tamaño 4
-
-\* Un destructor, tamaño 3
-
-\* Un submarino, tamaño 3
-
-\* Una patrullera, tamaño 2
+* Un portaviones, tamaño 5
+* Un acorazado, tamaño 4
+* Un destructor, tamaño 3
+* Un submarino, tamaño 3
+* Una patrullera, tamaño 2
 
 Aunque la implementación se intentará realizar de manera que esta
 especificacion pueda variarse facilmente.
@@ -289,35 +218,28 @@ orientado al disfrute del usuario en la interaccion con este.
 
 #### Objetivos
 
-\* El usuario tiene que poder saber en todo momento como tiene que
-interactuar con el juego. El usuario debe ser guiado con mensajes
-suficientemente claros .
-
-\* La representación gráfica tiene que ser atractiva pero sencilla y
-funcional.
-
-\* Se debe intentar que la experiencia sel usuario sea personal.
+* El usuario tiene que poder saber en todo momento como tiene que
+  interactuar con el juego. El usuario debe ser guiado con mensajes
+  suficientemente claros .
+* La representación gráfica tiene que ser atractiva pero sencilla y
+  funcional.
+* Se debe intentar que la experiencia sel usuario sea personal.
 
 #### Requerimientos del usuario
 
-\* El usuario se debe poder identificarse con su nombre para tener una
-experiencia personalizada
-
-\* El usuario podrá especificar el tamaño del campo de batalla para
-decidir la duración del juego
-
-\* El usuario podrá ser libre de colocar sus piezas en cualquier
-posición y en cualquier punto del campo de batalla para tratar de
-ocultar
-
-\* El usuario podrá ser libre de disparar a cualquier punto del campo de
-batalla
-
-\* El usuario no podrá repetir una posición de disparo usada en sus
-turnos anteriores.
-
-\* El Usuario podrá realizar disparos automáticos alewatorios para hacer
-mas sencilla su interacción.
+* El usuario se debe poder identificarse con su nombre para tener una
+  experiencia personalizada
+* El usuario podrá especificar el tamaño del campo de batalla para
+  decidir la duración del juego
+* El usuario podrá ser libre de colocar sus piezas en cualquier
+  posición y en cualquier punto del campo de batalla para tratar de
+  ocultar
+* El usuario podrá ser libre de disparar a cualquier punto del campo de
+  batalla
+* El usuario no podrá repetir una posición de disparo usada en sus
+  turnos anteriores.
+* El Usuario podrá realizar disparos automáticos alewatorios para hacer
+  mas sencilla su interacción.
 
 ### Diseño de la interfaz de usuario (UI)
 
@@ -327,15 +249,13 @@ mas sencilla su interacción.
 
 ![Menu Principal](./assets/media/image1.png)
 
-##### Diagrama de flujo del guego
+##### Diagrama de flujo del juego
 
-![](assets/media/image2.png)
+![Diagrama de flujo del juego](assets/media/image2.png)
 
-##### 
+##### Diagrama de flujo del turno de jugador
 
-##### Diagrama de flujo del turno de gugador
-
-![](assets/media/image3.png)
+![Diagrama de flujo del turno de jugador](assets/media/image3.png)
 
 #### Bocetos
 
@@ -352,7 +272,7 @@ Asumimos que el juego se visualizará en un terminal ANSI estandard el
 cual cuenta con 80 columnas y 24 lineas. Calculamos que la zona de
 combate puede tener un máximo de 12 cuadriculas de ancho y 10 de alto.
 
-![](assets/media/image4.png)
+![Boceto](assets/media/image4.png)
 
 ## Implementación
 
@@ -378,15 +298,11 @@ de esta clase heredan las clases especificas de barcos que tienen
 predefinidos tamaño y su designación que se fuerza a ser el nombre de la
 clase:
 
-  - Clase Patrol\_Boat(ship): tamaño = 2 cuadriculas
-
-  - Clase Submarine(ship) : tamaño = 3 cuadriculas
-
-  - Clase Destroyer(ship): tamaño = 3 cuadriculas
-
-  - Clase Battleship(ship): tamaño = 4 cuadriculas
-
-  - Clase Carrier(ship): tamaño = 5 cuadriculas
+- Clase Patrol\_Boat(ship): tamaño = 2 cuadriculas
+- Clase Submarine(ship) : tamaño = 3 cuadriculas
+- Clase Destroyer(ship): tamaño = 3 cuadriculas
+- Clase Battleship(ship): tamaño = 4 cuadriculas
+- Clase Carrier(ship): tamaño = 5 cuadriculas
 
 La clase Ship tambien implementa dos métodos que forman parte
 fundamental en la "busines logic" del aplicativo.
@@ -397,7 +313,7 @@ Este método comprueba si alguna parte del barco coincide con las
 coordenadas pasadas como argumento devolviendo RESULT\_HIT si hay
 coincidencia, o RESULT\_MISS en caso de no haberla.
 
-##### receive\_shot():
+##### método receive\_shot():
 
 Este método utiliza al método check\_coordinates() para comprobar si el
 barco ha sido bombardeado, en cuyo caso actualiza la información del
@@ -490,41 +406,43 @@ que atributos en cada situación concreta.
 
 #### Pantalla de inicio y de cambio de nombre del jugador
 
-![](assets/media/image5.png)
+![Pantalla de inicio](assets/media/image5.png)
 
 #### Menu principal
 
-![](assets/media/image6.png)
+![Menu principal](assets/media/image6.png)
 
 #### Pantalla de cambio de tamaño de la zona de batalla
 
-![](assets/media/image7.png)
+![cambio de tamaño de la zona de batalla](assets/media/image7.png)
 
 #### Pantalla inicial de posicionamiento de naves
 
-![](assets/media/image8.png)
+![posicionamiento de naves](assets/media/image8.png)
 
 #### Pantalla final de posicionamiento de naves e inicio del juego
 
-![](assets/media/image9.png)
+![inicio del juego](assets/media/image9.png)
 
 #### Pantalla del turno de disparo de la computadora
 
-![](assets/media/image10.png)
+![turno de la computadora](assets/media/image10.png)
 
 #### Pantalla de turno de disparo del jugador en estado avanzado del juego
 
-![](assets/media/image11.png)
+![turno del jugador](assets/media/image11.png)
 
 #### Pantalla de victoria del jugador
 
-#### ![](assets/media/image12.png)Pantalla de derrota del jugador
+![victoria del jugador](assets/media/image12.png)
 
-![](assets/media/image13.png)
+#### Pantalla de derrota del jugador
+
+![derrota del jugador](assets/media/image13.png)
 
 ### Mejoras futuras
 
-#### Crear un algoritmo predictivo 
+#### Crear un algoritmo predictivo
 
 Esto permitiria que los disparos automáticos del jugador y de la
 computadora fuesen más lógicos y de esta manera hacer el juego mucho más
@@ -599,24 +517,13 @@ han pasado exactamente las mismas pruebas.
 **Ejemplo de tests:**
 
 Estas son algunas pruebas programadas
-
-tests.receive\_shot(coordinates=( 0, 1),
-expected\_result=RESULT\_COLUMN\_ERROR, test\_name="COLUMN ERROR (too
-low)")
-
-tests.receive\_shot(coordinates=( 1,
-ROWS+1),expected\_result=RESULT\_ROW\_ERROR, test\_name="ROW ERROR (too
-high)")
-
-tests.fire\_shot(coordinates=( 1, 1), expected\_result=RESULT\_MISS,
-test\_name="MISS (top-left)")
-
-tests.fire\_shot(coordinates=( 1, 1),
-expected\_result=RESULT\_DUPLICATED, test\_name="Duplicated shot")
-
-tests.fire\_shot(coordinates=( 2, 3), expected\_result=RESULT\_SUNK,
-test\_name="HIT unit 2 Patrol\_Boat, SUNK")
-
+```
+  tests.receive\_shot(coordinates=( 0, 1), expected\_result=RESULT\_COLUMN\_ERROR, test\_name="COLUMN ERROR (toolow)")
+  tests.receive\_shot(coordinates=( 1,ROWS+1),expected\_result=RESULT\_ROW\_ERROR, test\_name="ROW ERROR (toohigh)")
+  tests.fire\_shot(coordinates=( 1, 1), expected\_result=RESULT\_MISS,test\_name="MISS (top-left)")
+  tests.fire\_shot(coordinates=( 1, 1),expected\_result=RESULT\_DUPLICATED, test\_name="Duplicated shot")
+  tests.fire\_shot(coordinates=( 2, 3), expected\_result=RESULT\_SUNK,test\_name="HIT unit 2 Patrol\_Boat, SUNK")
+```
 Una vez finalizadas las pruebas, se procede a grabar los resultados en
 dos archivos, uno para los de el jugador y otro para los de la
 computadora. Si todo es correcto, ambos seran identicos.
@@ -629,69 +536,41 @@ sistema más automatizado de pruebas.
 
 Estos son algunos resultados de las prueba realizadas
 
-**{**
-
-**"test\_receive\_shot": {**
-
-**"Test\_number": 1,**
-
-**"Name": "COLUMN ERROR (too low)",**
-
-**"Result": "OK",**
-
-**"Coordinates": \[0,1\],**
-
-**"Expected\_result": -1,**
-
-**"Actual\_result": -1,**
-
-**"Ship": "None"**
-
-**}**
-
-**},**
-
-**{**
-
-**"test\_receive\_shot": {**
-
-**"Test\_number": 2,**
-
-**"Name": "COLUMN ERROR (too high)",**
-
-**"Result": "OK",**
-
-**"Coordinates": \[11,1\],**
-
-**"Expected\_result": -1,**
-
-**"Actual\_result": -1,**
-
-**"Ship": "None"**
-
-**}**
-
-**},**
-
-**{ {**
-
-**"test\_receive\_shot": {**
-
-**"Test\_number": 1,**
-
-**"Name": "COLUMN ERROR (too low)",**
-
-**"Result": "OK",**
-
-**"Coordinates": \[0,1\],**
-
-**"Expected\_result": -1,**
-
-**"Actual\_result": -1,**
-
-**"Ship": "None"**
-
-**}**
+```
+{
+"test\_receive\_shot": {
+  "Test\_number": 1,
+  "Name": "COLUMN ERROR (too low)",
+  "Result": "OK",
+  "Coordinates": \[0,1\],
+  "Expected\_result": -1,
+  "Actual\_result": -1,
+  "Ship": "None"
+  }
+},
+{
+"test\_receive\_shot": {
+  "Test\_number": 2,
+  "Name": "COLUMN ERROR (too high)",
+  "Result": "OK",
+  "Coordinates": \[11,1\],
+  "Expected\_result": -1,
+  "Actual\_result": -1,
+  "Ship": "None"
+  }
+},
+{
+"test\_receive\_shot": {
+  "Test\_number": 1,
+  "Name": "COLUMN ERROR (too low)",
+  "Result": "OK",
+  "Coordinates": \[0,1\],
+  "Expected\_result": -1,
+  "Actual\_result": -1,
+  "Ship": "None"
+  }
+}
+```
 
 Por defecto, esta aplicación genera dos archivos /Results1.txt y
 /Results2.txt que contienen los resultados de las pruebas de la
@@ -705,7 +584,7 @@ manualmente, introduciendo los valores máximos, minimos, superando los
 máximos y los mínimos definidos,e introduciendo datos de tipos
 incorrectos.
 
-### Errores 
+### Errores
 
 Todos los bugs de la lógica de control fueron detectados y se
 corrigieron durante el sesarrollo de la aplicación. Una vez la
@@ -737,79 +616,56 @@ demasiado largo
 Los siguientes pasos indican como desplegar el aplicativo en el servicio
 de aplicaciones Heroku
 
-  - Clona el repositorio https://github.com/Juanma1313/battleships.git
-    en tu propia cuenta github
-    
-    Puedes encontrar las instrucciones de como clonar el repositorio un
-    poco mas abajo.
+- Clona el repositorio https://github.com/Juanma1313/battleships.git
+  en tu propia cuenta github
 
-  - Inicia sesión o registra una nueva cuenta en Heroku
+  Puedes encontrar las instrucciones de como clonar el repositorio un
+  poco mas abajo.
+- Inicia sesión o registra una nueva cuenta en Heroku
+- Usa la opción "Nuevo" en el panel de control y seleccione "Crear
+  nueva app".
+- Selecciona un nombre para la app, como por ejemploe "Battleships" y
+  elige tu región.
+- Usa la opción "Crear app" y esperar a que aparezcan las solapas de
+  configuración.
+- seleccionar la solapa "Settings"
+- Es recomendable usar la opción "Reveal Config Vars" y añadir una
+  nueva variable:
 
-  - Usa la opción "Nuevo" en el panel de control y seleccione "Crear
-    nueva app".
-
-  - Selecciona un nombre para la app, como por ejemploe "Battleships" y
-    elige tu región.
-
-  - Usa la opción "Crear app" y esperar a que aparezcan las solapas de
-    configuración.
-
-  - seleccionar la solapa "Settings"
-
-  - Es recomendable usar la opción "Reveal Config Vars" y añadir una
-    nueva variable:
-    
-    KEY = PORT , VALUE = 8000
-
-  - Usa la opción "Add buildpack" para añadir primero "Python" y luego
-    "Nodejs"
-
-  - Elegir la solapa "Deploy" y usa la opción "GitHub" (connect to
-    GitHub")
-
-  - Desplazate hacia abajo y haga clic en "Conectar a GitHub".
-
-  - En la opción de busqueda del repositorio, escribe el nombre del
-    repositorio que has conado en tu cuenta de github. Al usar la
-    copción "Search" debería encontrarlo y aparecer con una opción de
-    "Connect" a su lado
-
-  - Usa la opción de "Connect" y espera a que aparezcan la nueva opcion
-    "Deploy Branch"
-
-  - Usa la opción "Deploy Branch" y espera hasta que haya terminado el
-    despliegue.
-
-  - Una vez recibido el mensaje "The app was successfully deployed" ya
-    se puede acceder a la aplicacion desplegada.
+  KEY = PORT , VALUE = 8000
+- Usa la opción "Add buildpack" para añadir primero "Python" y luego
+  "Nodejs"
+- Elegir la solapa "Deploy" y usa la opción "GitHub" (connect to
+  GitHub")
+- Desplazate hacia abajo y haga clic en "Conectar a GitHub".
+- En la opción de busqueda del repositorio, escribe el nombre del
+  repositorio que has conado en tu cuenta de github. Al usar la
+  copción "Search" debería encontrarlo y aparecer con una opción de
+  "Connect" a su lado
+- Usa la opción de "Connect" y espera a que aparezcan la nueva opcion
+  "Deploy Branch"
+- Usa la opción "Deploy Branch" y espera hasta que haya terminado el
+  despliegue.
+- Una vez recibido el mensaje "The app was successfully deployed" ya
+  se puede acceder a la aplicacion desplegada.
 
 ### Como Clonar el respositorio a tu cuenta de github
 
-  - Inicia sesion o registra una nueva cuenta em github.com
-
-  - Entra en la solapa "Repositories" y usa la opcion "New" para crear
-    un nuevo repositorio.
-
-  - Utiliza la opción "import a repository"
-
-  - En la opción "Your old repository's clone URL \*" introduce mi
-    repositorio "https://github.com/Juanma1313/battleships.git"
-
-  - Asigna tu propio nombre de repositorio y usa la opción "Beguin
-    import" para comenzar la importación.
-
-  - Una vez finalizado el proceso, deberias tener una copia exacta de mi
-    repositorio en tu cuenta de github.
+- Inicia sesion o registra una nueva cuenta em github.com
+- Entra en la solapa "Repositories" y usa la opcion "New" para crear
+  un nuevo repositorio.
+- Utiliza la opción "import a repository"
+- En la opción "Your old repository's clone URL \*" introduce mi
+  repositorio "https://github.com/Juanma1313/battleships.git"
+- Asigna tu propio nombre de repositorio y usa la opción "Beguin
+  import" para comenzar la importación.
+- Una vez finalizado el proceso, deberias tener una copia exacta de mi
+  repositorio en tu cuenta de github.
 
 ## Créditos
 
-  - StackOverflow in some specific Python problems
-
-  - Wikipedia provided most of the information regarding ANSI Escape
-    sequences
-
-  - Microsoft Visual Studio Code, was used as development environment
-
-  - Code institute Python Linter was usewd for PEP8 format rervision.
-
-  -
+- StackOverflow in some specific Python problems
+- Wikipedia provided most of the information regarding ANSI Escape
+  sequences
+- Microsoft Visual Studio Code, was used as development environment
+- Code institute Python Linter was usewd for PEP8 format rervision.
